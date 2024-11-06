@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 using TodoApp.Service.Abstracts;
 using TodoApp.Service.Concretes;
 using TodoApp.Service.Profiles;
@@ -18,6 +21,9 @@ namespace TodoApp.Service
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IToDoService, ToDoService>();
 
+
+            services.AddFluentValidationAutoValidation();
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             return services;
         }
     }
